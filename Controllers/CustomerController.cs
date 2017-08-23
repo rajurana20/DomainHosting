@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace DomainHosting.Controllers
 {
@@ -26,7 +27,15 @@ namespace DomainHosting.Controllers
         [HttpPost]
         public ActionResult Create(Customer customer)
         {
-            if(ModelState.IsValid)
+            string fileName = "";
+            fileName = Path.GetFileNameWithoutExtension(customer.ImageFile.FileName);
+            string extension = Path.GetExtension(customer.ImageFile.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+            customer.Photo = "~/images/" + fileName;
+            fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
+            customer.ImageFile.SaveAs(fileName);
+
+            if (ModelState.IsValid)
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
@@ -38,6 +47,7 @@ namespace DomainHosting.Controllers
 
         public ActionResult Edit(int id=0)
         {
+
             Customer eId = db.Customers.Find(id);
             if(eId==null)
             {
@@ -49,8 +59,15 @@ namespace DomainHosting.Controllers
 
         public ActionResult Edit(Customer customer)
         {
-            if(ModelState.IsValid)
+            
+            if (ModelState.IsValid)
             {
+                string fileName = Path.GetFileNameWithoutExtension(customer.ImageFile1.FileName);
+                string extension = Path.GetExtension(customer.ImageFile1.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                customer.Photo = "~/images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
+                customer.ImageFile1.SaveAs(fileName);
                 db.Entry(customer).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 

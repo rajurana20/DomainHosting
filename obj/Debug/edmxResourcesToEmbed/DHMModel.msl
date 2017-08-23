@@ -4,12 +4,12 @@
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="DBDHMModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
           <ScalarProperty Name="CId" ColumnName="CId" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="SId" ColumnName="SId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

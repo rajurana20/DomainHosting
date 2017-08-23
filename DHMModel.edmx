@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DBDHMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DBDHMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CId" />
@@ -14,7 +14,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="SId" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -46,18 +46,6 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
           <Property Name="SName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SCost" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Customer_Customer">
-          <End Role="Services" Type="Self.Services" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="SId" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="SId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CustomerService_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="CustomerService" Type="Self.CustomerService" Multiplicity="*" />
@@ -104,10 +92,6 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
     [CustomerService].[SId] AS [SId]
     FROM [dbo].[CustomerService] AS [CustomerService]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="Customer" EntitySet="Customer" />
-          </AssociationSet>
           <AssociationSet Name="FK_CustomerService_Customer" Association="Self.FK_CustomerService_Customer">
             <End Role="Customer" EntitySet="Customer" />
             <End Role="CustomerService" EntitySet="CustomerService" />
@@ -121,8 +105,7 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
             <End Role="Payment" EntitySet="Payment" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DBDHMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -135,10 +118,9 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="SId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Service" Relationship="Self.FK_Customer_Customer" FromRole="Customer" ToRole="Services" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Customer" FromRole="Customer" ToRole="Payment" />
           <NavigationProperty Name="Services" Relationship="Self.CustomerService" FromRole="Customer" ToRole="Services" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Payment">
           <Key>
@@ -160,21 +142,8 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
           <Property Name="SId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SCost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Customer" FromRole="Services" ToRole="Customer" />
           <NavigationProperty Name="Customers1" Relationship="Self.CustomerService" FromRole="Services" ToRole="Customer" />
         </EntityType>
-        <Association Name="FK_Customer_Customer">
-          <End Role="Services" Type="Self.Service" Multiplicity="1" />
-          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Services">
-              <PropertyRef Name="SId" />
-            </Principal>
-            <Dependent Role="Customer">
-              <PropertyRef Name="SId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Payment_Customer">
           <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
           <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
@@ -195,10 +164,6 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="Services" EntityType="Self.Service" />
-          <AssociationSet Name="FK_Customer_Customer" Association="Self.FK_Customer_Customer">
-            <End Role="Services" EntitySet="Services" />
-            <End Role="Customer" EntitySet="Customers" />
-          </AssociationSet>
           <AssociationSet Name="FK_Payment_Customer" Association="Self.FK_Payment_Customer">
             <End Role="Customer" EntitySet="Customers" />
             <End Role="Payment" EntitySet="Payments" />
@@ -217,12 +182,12 @@ warning 6002: The table/view 'DBDHM.dbo.CustomerService' does not have a primary
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DBDHMModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
                 <ScalarProperty Name="CId" ColumnName="CId" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="SId" ColumnName="SId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -28,8 +28,6 @@ C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\DomainHosting.dll.config
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\DomainHosting.dll
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\DomainHosting.pdb
-C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\DomainHosting.dll.CodeAnalysisLog.xml
-C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\DomainHosting.dll.lastcodeanalysissucceeded
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\Antlr3.Runtime.dll
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\EntityFramework.dll
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\EntityFramework.SqlServer.dll
@@ -95,3 +93,4 @@ C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\bin\Microsoft.AI.Web.xml
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\obj\Debug\DomainHosting.dll
 C:\Users\Raju\documents\visual studio 2017\Projects\DomainHosting\DomainHosting\obj\Debug\DomainHosting.pdb
+C:\Users\Raju\Documents\Visual Studio 2017\Projects\DomainHosting\DomainHosting\obj\Debug\DomainHosting.csprojResolveAssemblyReference.cache

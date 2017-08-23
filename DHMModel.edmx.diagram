@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="DBDHMModel.Customer" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDHMModel.Payment" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBDHMModel.Service" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <AssociationConnector Association="DBDHMModel.FK_Customer_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="DBDHMModel.FK_Payment_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="DBDHMModel.CustomerService" ManuallyRouted="false" />
       </Diagram>
